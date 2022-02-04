@@ -8,7 +8,7 @@ public class ShipBuilder : MonoBehaviour
     [SerializeField] private ProjectSettings ProjectSettings;
 
     public ShipData ShipData { get; private set; } = new ShipData();
-    private GameObject shipObject;
+    public GameObject ShipObject { get; private set; }
 
 
     private void Awake()
@@ -35,7 +35,7 @@ public class ShipBuilder : MonoBehaviour
     {
         Tile tile = ProjectSettings.InstantiateTile(tileData.TileID);
         
-        tile.gameObject.transform.SetParent(shipObject.transform);
+        tile.gameObject.transform.SetParent(ShipObject.transform);
         tile.gameObject.transform.localPosition = new Vector3(tileData.X, tileData.Y, 0);
         tile.gameObject.GetComponent<Rigidbody2D>().simulated = EnablePhysics;
 
@@ -44,13 +44,13 @@ public class ShipBuilder : MonoBehaviour
         joint.breakForce = Mathf.Infinity;
         joint.breakTorque = Mathf.Infinity;
         joint.dampingRatio = 1.0f;
-        joint.connectedBody = shipObject.GetComponent<Rigidbody2D>();
+        joint.connectedBody = ShipObject.GetComponent<Rigidbody2D>();
     }
 
     private void ResetShipObject()
     {
-        Destroy(shipObject);
-        shipObject = Instantiate(ShipPrefab);
-        shipObject.GetComponent<Rigidbody2D>().simulated = EnablePhysics;
+        Destroy(ShipObject);
+        ShipObject = Instantiate(ShipPrefab);
+        ShipObject.GetComponent<Rigidbody2D>().simulated = EnablePhysics;
     }
 }

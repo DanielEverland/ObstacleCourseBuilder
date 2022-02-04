@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShipController : PlayerController
 {
     [SerializeField] private ShipBuilder ShipBuilder;
+    [SerializeField] private CameraFollow CameraFollow;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class ShipController : PlayerController
         BindToKeyContinuous(KeyCode.DownArrow, OnPressedDown);
 
         ShipBuilder.LoadShip(ShipSerializer.DeserializeShip());
+        CameraFollow.SetTarget(ShipBuilder.ShipObject);
     }
 
     private void OnPressedRight()
