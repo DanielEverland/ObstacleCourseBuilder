@@ -8,7 +8,6 @@ public class ProjectSettings : ScriptableObject
     [System.Serializable]
     public class TileInfo
     {
-        public uint ID = 0;
         public GameObject TileObj;
     }
 
@@ -19,7 +18,7 @@ public class ProjectSettings : ScriptableObject
     {
         foreach (TileInfo tileEntry in TileTypes)
         {
-            if (tileEntry.ID == id)
+            if (tileEntry.TileObj.GetComponent<Tile>().GetID() == id)
                 return tileEntry.TileObj.GetComponent<Tile>();
         }
 
@@ -31,15 +30,5 @@ public class ProjectSettings : ScriptableObject
         Tile defaultObj = GetTile(id);
         GameObject instantiated = Instantiate(defaultObj.gameObject);
         return instantiated.GetComponent<Tile>();
-    }
-
-    private void OnValidate()
-    {
-        for (int i = 0; i < TileTypes.Count; i++)
-        {
-            TileInfo info = TileTypes[i];
-            if (info.TileObj != null)
-                TileTypes[i].ID = info.TileObj.GetComponent<Tile>().GetID();
-        }
     }
 }

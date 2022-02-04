@@ -16,12 +16,12 @@ public class BuildController : PlayerController
     
     private void OnLeftMouseDown()
     {
-        InstantiateNewTile(ProjectSettings.TileTypes[0].ID);
+        InstantiateNewTile(ProjectSettings.TileTypes[0].TileObj.GetComponent<Tile>().GetID());
     }
 
     private void OnRightMouseDown()
     {
-        InstantiateNewTile(ProjectSettings.TileTypes[1].ID);
+        InstantiateNewTile(ProjectSettings.TileTypes[1].TileObj.GetComponent<Tile>().GetID());
     }
 
     private void InstantiateNewTile(uint id)
