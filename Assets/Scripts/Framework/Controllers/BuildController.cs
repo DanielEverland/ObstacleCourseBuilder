@@ -15,15 +15,15 @@ public class BuildController : PlayerController
 
     private void OnLeftMouseDown()
     {
-        InstantiateNewTile(0);
+        InstantiateNewTile(ProjectSettings.TileTypes[0].ID);
     }
 
     private void OnRightMouseDown()
     {
-        InstantiateNewTile(1);
+        InstantiateNewTile(ProjectSettings.TileTypes[1].ID);
     }
 
-    private void InstantiateNewTile(byte id)
+    private void InstantiateNewTile(uint id)
     {
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2Int roundedPosition = Vector2Int.RoundToInt(worldPos);

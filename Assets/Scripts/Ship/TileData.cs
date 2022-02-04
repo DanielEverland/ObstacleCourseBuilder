@@ -5,7 +5,9 @@ using UnityEngine;
 public class TileData
 {
     public byte TileID;
-    public Dictionary<string, string> Data;
+    public int X;
+    public int Y;
+    public Dictionary<string, string> Data = new Dictionary<string, string>();
 
     // Will override data if key already exists
     public void SetData<T>(string key, T data)
@@ -14,6 +16,11 @@ public class TileData
             Data.Remove(key);
         
         Data.Add(key, JsonUtil.ToJson(data));
+    }
+
+    public T GetData<T>(string key)
+    {
+        return JsonUtil.FromJson<T>(Data[key]);
     }
 
     public string ToJson()

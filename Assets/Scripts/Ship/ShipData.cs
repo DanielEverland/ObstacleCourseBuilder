@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipData : MonoBehaviour
+[System.Serializable]
+public class ShipData
 {
-    [SerializeField] private Dictionary<Vector2Int, TileData> Tiles;
+    public List<TileData> Tiles = new List<TileData>();
 }
