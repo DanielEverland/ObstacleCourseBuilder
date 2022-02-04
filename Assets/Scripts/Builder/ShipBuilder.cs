@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,8 +7,9 @@ public class ShipBuilder : MonoBehaviour
     [SerializeField] private GameObject ShipPrefab;
     [SerializeField] private ProjectSettings ProjectSettings;
 
-    private ShipData shipData = new ShipData();
+    public ShipData ShipData { get; private set; } = new ShipData();
     private GameObject shipObject;
+
 
     private void Awake()
     {
@@ -22,13 +21,13 @@ public class ShipBuilder : MonoBehaviour
         ResetShipObject();
         foreach (TileData tile in shipData.Tiles)
         {
-            InstantiateTile(tile);
+            AddTile(tile);
         }
     }
-
+    
     public void AddTile(TileData tileData)
     {
-        shipData.AddTile(tileData);
+        ShipData.AddTile(tileData);
         InstantiateTile(tileData);
     }
     

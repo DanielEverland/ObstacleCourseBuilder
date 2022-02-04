@@ -2,17 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class BuildController : PlayerController, ITileViewSelectedInterface
+public class BuildController : PlayerController, ITileViewSelectedInterface, IFlySelectedInterface
 {
     [SerializeField] private ProjectSettings ProjectSettings;
     [SerializeField] private ShipBuilder ShipBuilder;
-
+    
     private uint selectedTileType;
     
     private void Awake()
     {
         BindToKeyDown(KeyCode.Mouse0, OnLeftMouseDown);
+    }
+
+    private void Start()
+    {
+        if (ShipSerializer.HasSavedShip())
+        {
+            ShipBuilder.LoadShip(ShipSerializer.DeserializeShip());
+        }
     }
     
     private void OnLeftMouseDown()
@@ -36,5 +45,11 @@ public class BuildController : PlayerController, ITileViewSelectedInterface
     public void OnSelected(uint tileID)
     {
         selectedTileType = tileID;
+    }
+
+    public void OnFlySelected()
+    {
+        ShipSerializer.SerializeShip(ShipBuilder.ShipData);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 }

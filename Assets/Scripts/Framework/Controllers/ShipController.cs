@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShipController : PlayerController
 {
+    [SerializeField] private ShipBuilder ShipBuilder;
+
     private void Awake()
     {
         BindToKeyContinuous(KeyCode.D, OnPressedRight);
@@ -17,6 +19,8 @@ public class ShipController : PlayerController
 
         BindToKeyContinuous(KeyCode.S, OnPressedDown);
         BindToKeyContinuous(KeyCode.DownArrow, OnPressedDown);
+
+        ShipBuilder.LoadShip(ShipSerializer.DeserializeShip());
     }
 
     private void OnPressedRight()
