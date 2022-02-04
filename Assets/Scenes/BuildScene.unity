@@ -217,7 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1587151891}
   - component: {fileID: 1587151890}
-  - component: {fileID: 1587151889}
+  - component: {fileID: 1587151892}
   m_Layer: 0
   m_Name: SceneSettings
   m_TagString: Untagged
@@ -225,18 +225,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1587151889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1587151888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bfea65edc2755a459d82401f6412629, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1587151890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143b5e84ed88a0c4da429e877fa00153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerControllerInstance: {fileID: 1587151889}
+  PlayerControllerInstance: {fileID: 1587151892}
 --- !u!4 &1587151891
 Transform:
   m_ObjectHideFlags: 0
@@ -265,3 +253,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1587151892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587151888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d0c4a53e75eba84980aaaa42a1861fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
