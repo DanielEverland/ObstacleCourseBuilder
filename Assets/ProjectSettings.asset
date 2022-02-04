@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: ProjectSettings
   m_EditorClassIdentifier: 
   TileTypes:
-  - {fileID: 1288826308711255470, guid: cca3e94ba20385747b750863a5f9d836, type: 3}
-  - {fileID: 1288826308711255470, guid: 8357e76be36d84742a78cfbcc9275361, type: 3}
+  - ID: 609873837
+    TileObj: {fileID: 33521070763055411, guid: cca3e94ba20385747b750863a5f9d836, type: 3}
+  - ID: 1181864413
+    TileObj: {fileID: 3138747348546419674, guid: 8357e76be36d84742a78cfbcc9275361, type: 3}

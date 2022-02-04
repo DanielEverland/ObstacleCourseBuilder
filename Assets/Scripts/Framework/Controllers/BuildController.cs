@@ -6,13 +6,14 @@ using UnityEngine;
 public class BuildController : PlayerController
 {
     [SerializeField] private ProjectSettings ProjectSettings;
+    [SerializeField] private ShipBuilder ShipBuilder;
     
     private void Awake()
     {
         BindToKeyDown(KeyCode.Mouse0, OnLeftMouseDown);
         BindToKeyDown(KeyCode.Mouse1, OnRightMouseDown);
     }
-
+    
     private void OnLeftMouseDown()
     {
         InstantiateNewTile(ProjectSettings.TileTypes[0].ID);
@@ -28,7 +29,11 @@ public class BuildController : PlayerController
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2Int roundedPosition = Vector2Int.RoundToInt(worldPos);
 
-        Tile newTile = ProjectSettings.InstantiateTile(id);
-        newTile.gameObject.transform.position = (Vector2)roundedPosition;
+        TileData newTileData = new TileData();
+        newTileData.X = roundedPosition.x;
+        newTileData.Y = roundedPosition.y;
+        newTileData.TileID = id;
+
+        ShipBuilder.AddTile(newTileData);
     }
 }

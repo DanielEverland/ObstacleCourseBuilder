@@ -266,3 +266,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectSettings: {fileID: 11400000, guid: e579d26d2823fe04ca5067a4018094cb, type: 2}
+  ShipBuilder: {fileID: 2012677086}
+--- !u!1 &2012677085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2012677087}
+  - component: {fileID: 2012677086}
+  m_Layer: 0
+  m_Name: Builder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2012677086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012677085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794afcb86442ecf40b764c57c3e0e763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnablePhysics: 1
+  ShipPrefab: {fileID: 3684582616660019062, guid: 512f13362ddaa3545949a41120707d39, type: 3}
+  ProjectSettings: {fileID: 11400000, guid: e579d26d2823fe04ca5067a4018094cb, type: 2}
+--- !u!4 &2012677087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012677085}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3528399, y: -0.19997624, z: 0.06031336}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
