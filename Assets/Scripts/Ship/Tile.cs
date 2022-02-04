@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 [System.Serializable]
 public abstract class Tile : MonoBehaviour
 {
+    [SerializeField] public string TileName;
     [SerializeField] private Vector2Int _size = Vector2Int.one;
     [SerializeField, HideInInspector] private uint id = 0;
 

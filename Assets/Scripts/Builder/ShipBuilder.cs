@@ -31,7 +31,7 @@ public class ShipBuilder : MonoBehaviour
         shipData.AddTile(tileData);
         InstantiateTile(tileData);
     }
-
+    
     private void InstantiateTile(TileData tileData)
     {
         Tile tile = ProjectSettings.InstantiateTile(tileData.TileID);

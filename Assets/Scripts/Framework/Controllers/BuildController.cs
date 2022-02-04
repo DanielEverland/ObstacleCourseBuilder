@@ -3,25 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildController : PlayerController
+public class BuildController : PlayerController, ITileViewSelectedInterface
 {
     [SerializeField] private ProjectSettings ProjectSettings;
     [SerializeField] private ShipBuilder ShipBuilder;
+
+    private uint selectedTileType;
     
     private void Awake()
     {
         BindToKeyDown(KeyCode.Mouse0, OnLeftMouseDown);
-        BindToKeyDown(KeyCode.Mouse1, OnRightMouseDown);
     }
     
     private void OnLeftMouseDown()
     {
-        InstantiateNewTile(ProjectSettings.TileTypes[0].TileObj.GetComponent<Tile>().GetID());
-    }
-
-    private void OnRightMouseDown()
-    {
-        InstantiateNewTile(ProjectSettings.TileTypes[1].TileObj.GetComponent<Tile>().GetID());
+        InstantiateNewTile(selectedTileType);
     }
 
     private void InstantiateNewTile(uint id)
@@ -35,5 +31,10 @@ public class BuildController : PlayerController
         newTileData.TileID = id;
 
         ShipBuilder.AddTile(newTileData);
+    }
+
+    public void OnSelected(uint tileID)
+    {
+        selectedTileType = tileID;
     }
 }
