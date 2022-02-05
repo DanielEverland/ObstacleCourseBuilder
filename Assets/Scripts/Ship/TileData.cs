@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct TileData
+[System.Serializable]
+public class TileData
 {
     public uint TileID;
     public int X;
     public int Y;
-    public Dictionary<string, string> Data;
+    public Dictionary<string, string> Data = new Dictionary<string, string>();
 
     // Will override data if key already exists
     public void SetData<T>(string key, T data)

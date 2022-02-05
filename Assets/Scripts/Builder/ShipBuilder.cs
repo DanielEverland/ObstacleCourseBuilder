@@ -34,6 +34,7 @@ public class ShipBuilder : MonoBehaviour
     private void InstantiateTile(TileData tileData)
     {
         Tile tile = ProjectSettings.InstantiateTile(tileData.TileID);
+        tile.ApplyData(tileData);
         
         tile.gameObject.transform.SetParent(ShipObject.transform);
         tile.gameObject.transform.localPosition = new Vector3(tileData.X, tileData.Y, 0);

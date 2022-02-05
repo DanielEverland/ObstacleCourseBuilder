@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ThrusterTile : Tile, IContextMenuHandler
@@ -10,6 +11,18 @@ public class ThrusterTile : Tile, IContextMenuHandler
     [SerializeField] private KeybindingMenu KeybindingConeMenuPrefab;
 
     private HashSet<KeyCode> BoundInput = new HashSet<KeyCode>();
+    private const string InputKey = "input";
+
+    public override void ApplyData(TileData tileData)
+    {
+        base.ApplyData(tileData);
+
+        if(HasData(InputKey))
+        {
+            List<int> inputIntegers = GetData<List<int>>(InputKey);
+            BoundInput = inputIntegers.Select(x => (KeyCode)x).ToHashSet();
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -39,6 +52,7 @@ public class ThrusterTile : Tile, IContextMenuHandler
 
     private void SaveData()
     {
-        
+        List<int> integerKeys = BoundInput.Select(x => (int)x).ToList();
+        SetData(InputKey, integerKeys);
     }
 }

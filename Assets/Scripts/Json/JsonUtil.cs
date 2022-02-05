@@ -6,6 +6,8 @@ public class JsonUtil
     public static string ToJson<T>(T obj)
     {
         JsonSerializer serializer = new JsonSerializer();
+        serializer.Formatting = Formatting.Indented;
+        
         StringWriter stringWriter = new StringWriter();
 
         using (JsonWriter writer = new JsonTextWriter(stringWriter))

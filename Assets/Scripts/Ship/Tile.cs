@@ -12,8 +12,8 @@ public abstract class Tile : MonoBehaviour
     [SerializeField, HideInInspector] private uint id = 0;
 
     public Vector2Int Size => _size;
-
-    private Dictionary<string, string> data;
+    
+    private TileData tileData = new TileData();
 
     private void OnValidate()
     {
@@ -23,21 +23,26 @@ public abstract class Tile : MonoBehaviour
 
     public virtual void ApplyData(TileData tileData)
     {
-        data = tileData.Data;
+        this.tileData = tileData;
     }
 
     protected bool HasData(string key)
     {
-        return data.ContainsKey(key);
+        return tileData.Data.ContainsKey(key);
     }
 
     protected T GetData<T>(string key)
     {
-        if (data.ContainsKey(key))
-            return JsonUtility.FromJson<T>(data[key]);
+        if (tileData.Data.ContainsKey(key))
+            return JsonUtil.FromJson<T>(tileData.Data[key]);
 
         Debug.LogError($"Attempted to get data with key {key}, but none exists!");
         return default;
+    }
+
+    protected void SetData<T>(string key, T obj)
+    {
+        tileData.SetData(key, obj);
     }
 
     public uint GetID()
