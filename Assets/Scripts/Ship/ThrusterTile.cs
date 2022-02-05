@@ -18,7 +18,7 @@ public class ThrusterTile : Tile, IContextMenuHandler
     {
         base.ApplyData(tileData);
 
-        if(HasData(InputKey))
+        if(HasData(InputKey) && PlayerController.Current != null)
         {
             List<int> inputIntegers = GetData<List<int>>(InputKey);
             BoundInput = inputIntegers.Select(x => (KeyCode)x).ToHashSet();
