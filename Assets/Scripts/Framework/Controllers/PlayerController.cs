@@ -6,21 +6,28 @@ using UnityEngine.EventSystems;
 
 public abstract class PlayerController : Controller
 {
+    public static PlayerController Current;
+
     private readonly Dictionary<KeyCode, Action> KeyDownDelegates = new Dictionary<KeyCode, Action>();
     private readonly Dictionary<KeyCode, Action> KeyUpDelegates = new Dictionary<KeyCode, Action>();
     private readonly Dictionary<KeyCode, Action> KeyContinuousDelegates = new Dictionary<KeyCode, Action>();
-    
-    protected void BindToKeyDown(KeyCode key, Action callback)
+
+    private void Awake()
+    {
+        Current = this;
+    }
+
+    public void BindToKeyDown(KeyCode key, Action callback)
     {
         KeyDownDelegates.Add(key, callback);
     }
 
-    protected void BindToKeyUp(KeyCode key, Action callback)
+    public void BindToKeyUp(KeyCode key, Action callback)
     {
         KeyUpDelegates.Add(key, callback);
     }
     
-    protected void BindToKeyContinuous(KeyCode key, Action callback)
+    public void BindToKeyContinuous(KeyCode key, Action callback)
     {
         KeyContinuousDelegates.Add(key, callback);
     }

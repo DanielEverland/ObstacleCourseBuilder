@@ -12,6 +12,7 @@ public class ThrusterTile : Tile, IContextMenuHandler
 
     private HashSet<KeyCode> BoundInput = new HashSet<KeyCode>();
     private const string InputKey = "input";
+    private int keysHeld = 0;
 
     public override void ApplyData(TileData tileData)
     {
@@ -21,10 +22,24 @@ public class ThrusterTile : Tile, IContextMenuHandler
         {
             List<int> inputIntegers = GetData<List<int>>(InputKey);
             BoundInput = inputIntegers.Select(x => (KeyCode)x).ToHashSet();
+
+            foreach (KeyCode keyCode in BoundInput)
+            {
+                PlayerController.Current.BindToKeyDown(keyCode, () => keysHeld++);
+                PlayerController.Current.BindToKeyUp(keyCode, () => keysHeld--);
+            }
         }
     }
 
     private void FixedUpdate()
+    {
+        if (keysHeld > 0)
+        {
+            FireThruster();
+        }
+    }
+
+    private void FireThruster()
     {
         Vector2 thrusterDirection = transform.TransformDirection(0.0f, 1.0f, 0.0f);
         gameObject.transform.parent.gameObject.GetComponent<Rigidbody2D>().AddForceAtPosition(thrusterDirection * Force, transform.position);
