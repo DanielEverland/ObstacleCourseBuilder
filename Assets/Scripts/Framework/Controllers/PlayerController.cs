@@ -32,7 +32,7 @@ public abstract class PlayerController : Controller
         KeyContinuousDelegates.Add(key, callback);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         QueryDelegateDictionary(KeyDownDelegates, Input.GetKeyDown);
         QueryDelegateDictionary(KeyUpDelegates, Input.GetKeyUp);
