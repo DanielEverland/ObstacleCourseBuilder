@@ -37,7 +37,8 @@ public class ShipBuilder : MonoBehaviour
         
         tile.gameObject.transform.SetParent(ShipObject.transform);
         tile.gameObject.transform.localPosition = new Vector3(tileData.X, tileData.Y, 0);
-        tile.gameObject.GetComponent<Rigidbody2D>().simulated = EnablePhysics;
+        if(!EnablePhysics)
+            tile.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
 
         var joint = tile.AddComponent<FixedJoint2D>();
         joint.enableCollision = true;
@@ -51,6 +52,8 @@ public class ShipBuilder : MonoBehaviour
     {
         Destroy(ShipObject);
         ShipObject = Instantiate(ShipPrefab);
-        ShipObject.GetComponent<Rigidbody2D>().simulated = EnablePhysics;
+
+        if(!EnablePhysics)
+            ShipObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 }
