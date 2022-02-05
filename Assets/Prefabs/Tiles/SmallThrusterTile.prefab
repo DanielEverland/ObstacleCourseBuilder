@@ -51,6 +51,7 @@ MonoBehaviour:
   _size: {x: 1, y: 1}
   id: 1181864413
   Force: 10
+  KeybindingConeMenuPrefab: {fileID: 3028414240254499245, guid: c85ef85620d810f46b1f299d334782f8, type: 3}
 --- !u!61 &3138747348546419653
 BoxCollider2D:
   m_ObjectHideFlags: 0
