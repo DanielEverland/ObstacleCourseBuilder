@@ -718,6 +718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectSettings: {fileID: 11400000, guid: e579d26d2823fe04ca5067a4018094cb, type: 2}
   ShipBuilder: {fileID: 2012677086}
+  GhostPrefab: {fileID: 2308654389763891437, guid: b95c41c670eb50b47a01811ce6a12253, type: 3}
 --- !u!114 &1587151893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1130,7 +1131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3933703263630378930, guid: 068b5ede06cec0b499023622a996567d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00010410384
+      value: 0.0001753642
       objectReference: {fileID: 0}
     - target: {fileID: 3933703263630922144, guid: 068b5ede06cec0b499023622a996567d, type: 3}
       propertyPath: m_AnchorMax.x

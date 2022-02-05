@@ -13,12 +13,20 @@ public class BuildController : PlayerController, ITileViewSelectedInterface, IFl
     [SerializeField] private SpriteRenderer GhostPrefab;
     
     private uint selectedTileType;
+    private float rotation;
 
     private SpriteRenderer GhostObject;
     
     private void Awake()
     {
         BindToKeyDown(KeyCode.Mouse0, OnLeftMouseDown);
+        BindToKeyDown(KeyCode.R, () =>
+        {
+            rotation += 90.0f;
+            if (rotation >= 360.0f)
+                rotation = 0.0f;
+        });
+
         GhostObject = Instantiate(GhostPrefab);
     }
 
@@ -38,6 +46,7 @@ public class BuildController : PlayerController, ITileViewSelectedInterface, IFl
         Vector3 ghostPosition = (Vector2) GetTilePosition();
         ghostPosition.z = -1.0f;
         GhostObject.transform.position = ghostPosition;
+        GhostObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -rotation);
     }
     
     private void OnLeftMouseDown()
@@ -53,6 +62,7 @@ public class BuildController : PlayerController, ITileViewSelectedInterface, IFl
         TileData newTileData = new TileData();
         newTileData.X = roundedPosition.x;
         newTileData.Y = roundedPosition.y;
+        newTileData.Rotation = rotation;
         newTileData.TileID = id;
 
         ShipBuilder.AddTile(newTileData);

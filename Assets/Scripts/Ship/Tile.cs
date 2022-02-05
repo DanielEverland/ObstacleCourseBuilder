@@ -9,6 +9,7 @@ public abstract class Tile : MonoBehaviour
 {
     [SerializeField] public string TileName;
     [SerializeField] private Vector2Int _size = Vector2Int.one;
+    [SerializeField] protected SpriteRenderer Renderer;
     [SerializeField, HideInInspector] private uint id = 0;
 
     public Vector2Int Size => _size;
@@ -24,6 +25,7 @@ public abstract class Tile : MonoBehaviour
     public virtual void ApplyData(TileData tileData)
     {
         this.tileData = tileData;
+        Renderer.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -tileData.Rotation);
     }
 
     protected bool HasData(string key)

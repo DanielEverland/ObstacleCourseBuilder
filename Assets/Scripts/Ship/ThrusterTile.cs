@@ -41,7 +41,7 @@ public class ThrusterTile : Tile, IContextMenuHandler
 
     private void FireThruster()
     {
-        Vector2 thrusterDirection = transform.TransformDirection(0.0f, 1.0f, 0.0f);
+        Vector2 thrusterDirection = Renderer.transform.TransformDirection(0.0f, 1.0f, 0.0f);
         gameObject.transform.parent.gameObject.GetComponent<Rigidbody2D>().AddForceAtPosition(thrusterDirection * Force, transform.position);
     }
 

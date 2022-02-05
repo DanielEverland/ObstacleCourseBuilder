@@ -8,9 +8,9 @@ public abstract class PlayerController : Controller
 {
     public static PlayerController Current;
 
-    private readonly Dictionary<KeyCode, Action> KeyDownDelegates = new Dictionary<KeyCode, Action>();
-    private readonly Dictionary<KeyCode, Action> KeyUpDelegates = new Dictionary<KeyCode, Action>();
-    private readonly Dictionary<KeyCode, Action> KeyContinuousDelegates = new Dictionary<KeyCode, Action>();
+    private readonly Dictionary<KeyCode, List<Action>> KeyDownDelegates = new Dictionary<KeyCode, List<Action>>();
+    private readonly Dictionary<KeyCode, List<Action>> KeyUpDelegates = new Dictionary<KeyCode, List<Action>>();
+    private readonly Dictionary<KeyCode, List<Action>> KeyContinuousDelegates = new Dictionary<KeyCode, List<Action>>();
 
     private void Awake()
     {
@@ -19,17 +19,26 @@ public abstract class PlayerController : Controller
 
     public void BindToKeyDown(KeyCode key, Action callback)
     {
-        KeyDownDelegates.Add(key, callback);
+        if(!KeyDownDelegates.ContainsKey(key))
+            KeyDownDelegates.Add(key, new List<Action>());
+        
+        KeyDownDelegates[key].Add(callback);
     }
 
     public void BindToKeyUp(KeyCode key, Action callback)
     {
-        KeyUpDelegates.Add(key, callback);
+        if(!KeyUpDelegates.ContainsKey(key))
+            KeyUpDelegates.Add(key, new List<Action>());
+        
+        KeyUpDelegates[key].Add(callback);
     }
     
     public void BindToKeyContinuous(KeyCode key, Action callback)
     {
-        KeyContinuousDelegates.Add(key, callback);
+        if(!KeyContinuousDelegates.ContainsKey(key))
+            KeyContinuousDelegates.Add(key, new List<Action>());
+        
+        KeyContinuousDelegates[key].Add(callback);
     }
 
     protected virtual void Update()
@@ -39,16 +48,16 @@ public abstract class PlayerController : Controller
         QueryDelegateDictionary(KeyContinuousDelegates, Input.GetKey);
     }
 
-    private void QueryDelegateDictionary(Dictionary<KeyCode, Action> delegates, Func<KeyCode, bool> predicate)
+    private void QueryDelegateDictionary(Dictionary<KeyCode, List<Action>> delegates, Func<KeyCode, bool> predicate)
     {
-        foreach (KeyValuePair<KeyCode, Action> pair in delegates)
+        foreach (KeyValuePair<KeyCode, List<Action>> pair in delegates)
         {
             if (IsMouseKey(pair.Key) && IsMouseOverUI())
                 continue;
 
             if (predicate.Invoke(pair.Key))
             {
-                pair.Value.Invoke();
+                pair.Value.ForEach(x => x.Invoke());
             }
         }
     }
