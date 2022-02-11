@@ -13,12 +13,12 @@ public class ShipBuilder : MonoBehaviour
 
     private void Awake()
     {
-        ResetShipObject();
+        ResetShipObject(new ShipData());
     }
 
     public void LoadShip(ShipData shipData)
     {
-        ResetShipObject();
+        ResetShipObject(shipData);
         foreach (TileData tile in shipData.Tiles)
         {
             AddTile(tile);
@@ -38,23 +38,29 @@ public class ShipBuilder : MonoBehaviour
         
         tile.gameObject.transform.SetParent(ShipObject.transform);
         tile.gameObject.transform.localPosition = new Vector3(tileData.X, tileData.Y, 0);
-        if(!EnablePhysics)
-            tile.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-
-        var joint = tile.AddComponent<FixedJoint2D>();
-        joint.enableCollision = true;
-        joint.breakForce = Mathf.Infinity;
-        joint.breakTorque = Mathf.Infinity;
-        joint.dampingRatio = 1.0f;
-        joint.connectedBody = ShipObject.GetComponent<Rigidbody2D>();
     }
 
-    private void ResetShipObject()
+    private void ResetShipObject(ShipData shipData)
     {
         Destroy(ShipObject);
         ShipObject = Instantiate(ShipPrefab);
 
-        if(!EnablePhysics)
-            ShipObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        Rigidbody2D shipRigidbody = ShipObject.GetComponent<Rigidbody2D>();
+        shipRigidbody.constraints = EnablePhysics ? shipRigidbody.constraints : RigidbodyConstraints2D.FreezeAll;
+        shipRigidbody.centerOfMass = GetCenterOfMass(shipData);
+    }
+
+    private Vector2 GetCenterOfMass(ShipData shipData)
+    {
+        Vector2 totalOffset = Vector2.zero;
+        float totalMass = 0.0f;
+        foreach (TileData tile in shipData.Tiles)
+        {
+            float tileMass = ProjectSettings.GetTile(tile.TileID).GetComponent<Tile>().Mass;
+            totalOffset += new Vector2(tile.X, tile.Y) * tileMass;
+            totalMass += tileMass;
+        }
+        
+        return totalMass == 0.0f ? Vector2.zero : totalOffset / totalMass;
     }
 }

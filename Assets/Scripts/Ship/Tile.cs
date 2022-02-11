@@ -9,9 +9,11 @@ public abstract class Tile : MonoBehaviour
 {
     [SerializeField] public string TileName;
     [SerializeField] private Vector2Int _size = Vector2Int.one;
+    [SerializeField] private float _mass = 1.0f;
     [SerializeField] protected SpriteRenderer Renderer;
     [SerializeField, HideInInspector] private uint id = 0;
 
+    public float Mass => _mass;
     public Vector2Int Size => _size;
     
     private TileData tileData = new TileData();
